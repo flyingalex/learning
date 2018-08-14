@@ -1,20 +1,18 @@
 import React from 'react';
 import { throttle } from 'lodash-es';
+import Parallax from './Parallax';
 
 const getWindowSize = () => {
-  let winW = 0;
-  let winH = 0;
-  if (document.body && document.body.offsetWidth) {
-    winW = document.body.offsetWidth;
-    winH = document.body.offsetHeight;
-  }
-  if (document.compatMode == 'CSS1Compat' && document.documentElement && document.documentElement.offsetWidth) {
-    winW = document.documentElement.offsetWidth;
-    winH = document.documentElement.offsetHeight;
-  }
-  if (window.innerWidth && window.innerHeight) {
-    winW = window.innerWidth;
-    winH = window.innerHeight;
+  let winW = window.innerWidth;
+  let winH = window.innerHeight;
+  if (typeof winH != 'number') {
+    if (document.compatMode == 'CSS1Compat') {
+      winW = document.documentElement.clientWidth;
+      winH = document.documentElement.clientHeight;
+    } else {
+      winW = document.body.clientWidth;
+      winH = document.body.clientHeight;
+    }
   }
   return { w: winW, h: winH };
 };
@@ -26,7 +24,7 @@ const containerStyle = {
   alignItems: 'center',
 };
 
-class Parallax extends React.Component {
+class App extends React.Component {
   componentDidMount() {
     const winSize = getWindowSize();
     window.addEventListener(
@@ -47,33 +45,69 @@ class Parallax extends React.Component {
   render() {
     return (
       <div>
-        <div className="container" style={containerStyle}>
-          <img style={{ paddingRight: '20px' }} className="img" src="http://via.placeholder.com/400x400" />
+        <Parallax
+          tagName="div"
+          containerProps={{
+            className: 'container',
+            style: containerStyle,
+          }}
+        >
+          <img
+            style={{ paddingRight: '20px' }}
+            className="img"
+            src="http://via.placeholder.com/400x400"
+          />
           <div>
-            Just put your image size after our URL and you'll get a placeholder image. Just put your image size after
-            our URL and you'll get a placeholder image. Just put your image size after our URL and you'll get a
-            placeholder image. Just put your image size after our URL and you'll get a placeholder image.
+            Just put your image size after our URL and you'll get a placeholder
+            image. Just put your image size after our URL and you'll get a
+            placeholder image. Just put your image size after our URL and you'll
+            get a placeholder image. Just put your image size after our URL and
+            you'll get a placeholder image.
           </div>
-        </div>
-        <div className="container" style={containerStyle}>
-          <img style={{ paddingRight: '20px' }} className="img" src="http://via.placeholder.com/400x400" />
+        </Parallax>
+        <Parallax
+          tagName="div"
+          containerProps={{
+            className: 'container',
+            style: containerStyle,
+          }}
+        >
+          <img
+            style={{ paddingRight: '20px' }}
+            className="img"
+            src="http://via.placeholder.com/400x400"
+          />
           <div>
-            Just put your image size after our URL and you'll get a placeholder image. Just put your image size after
-            our URL and you'll get a placeholder image. Just put your image size after our URL and you'll get a
-            placeholder image. Just put your image size after our URL and you'll get a placeholder image.
+            Just put your image size after our URL and you'll get a placeholder
+            image. Just put your image size after our URL and you'll get a
+            placeholder image. Just put your image size after our URL and you'll
+            get a placeholder image. Just put your image size after our URL and
+            you'll get a placeholder image.
           </div>
-        </div>
-        <div className="container" style={containerStyle}>
-          <img style={{ paddingRight: '20px' }} className="img" src="http://via.placeholder.com/400x400" />
+        </Parallax>
+        <Parallax
+          tagName="div"
+          containerProps={{
+            className: 'container',
+            style: containerStyle,
+          }}
+        >
+          <img
+            style={{ paddingRight: '20px' }}
+            className="img"
+            src="http://via.placeholder.com/400x400"
+          />
           <div>
-            Just put your image size after our URL and you'll get a placeholder image. Just put your image size after
-            our URL and you'll get a placeholder image. Just put your image size after our URL and you'll get a
-            placeholder image. Just put your image size after our URL and you'll get a placeholder image.
+            Just put your image size after our URL and you'll get a placeholder
+            image. Just put your image size after our URL and you'll get a
+            placeholder image. Just put your image size after our URL and you'll
+            get a placeholder image. Just put your image size after our URL and
+            you'll get a placeholder image.
           </div>
-        </div>
+        </Parallax>
       </div>
     );
   }
 }
 
-export default Parallax;
+export default App;
